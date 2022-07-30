@@ -1,0 +1,6 @@
+proj = project('MyProject')
+
+exec = c_executable('MyExec', proj, ['src/main.c'])
+
+
+make_generator.gen(exec, 'build/MyProject/MyExec')
