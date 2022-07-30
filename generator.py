@@ -2,14 +2,6 @@ import typing
 import os
 from program import *
 
-class product:
-    def __init__(self, out, cmd):
-        self.out = out
-        self.cmd = cmd
-
-    out = ''
-    cmd = ''
-
 class generator:
     def __init__(self, prog:program, outGen:typing.Callable[[str],str], argGen:typing.Callable[[str, str, list],list], args:list):
         self.__prog = prog
@@ -31,4 +23,4 @@ class generator:
         cmd = self.__prog.getPath()
         for a in args:
             cmd += ' ' + a
-        return product(outName, cmd)
+        return cmd, outName
