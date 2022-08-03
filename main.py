@@ -1,30 +1,17 @@
-#!/usr/bin/python
 import os
 import sys
 import getopt
 
-from generator import *
+from processor import *
 from program import *
+from headerdepend import *
+from fileglob import *
 
-def exec_abs(__build_file_source):
-    exec(__build_file_source)
+# cc = processor(gcc,
+#     lambda inPath : inPath + '.o',
+#     lambda inPath, outPath, args : [ '-o', outPath, '-c', inPath ] + args,
+#     []
+# )
 
-def include_subdirectory(path):
-    # Save working directory
-    cwd = os.getcwd()
 
-    # Read the source
-    file = open(path + '/build.bld')
-    src = file.read()
-    file.close()
-
-    # chdir to match file
-    os.chdir(path)
-
-    # Execute
-    exec_abs(src)
-
-    # Switch back to original working directory
-    os.chdir(cwd)
-
-include_subdirectory(sys.argv[1])
+print(globRecurse('test/src', '*.c'))

@@ -2,7 +2,7 @@ import typing
 import os
 from program import *
 
-class generator:
+class processor:
     def __init__(self, prog:program, outGen:typing.Callable[[str],str], argGen:typing.Callable[[str, str, list],list], args:list):
         self.__prog = prog
         self.__outGen = outGen
