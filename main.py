@@ -4,14 +4,18 @@ import getopt
 
 from processor import *
 from program import *
-from headerdepend import *
 from fileglob import *
+from cexecutable import *
 
-# cc = processor(gcc,
-#     lambda inPath : inPath + '.o',
-#     lambda inPath, outPath, args : [ '-o', outPath, '-c', inPath ] + args,
-#     []
-# )
+gcc = program('gcc')
 
+src = globRecurse('test/src', '*.c')
 
-print(globRecurse('test/src', '*.c'))
+test = c_executable(gcc, 'test', src, ['-O3'])
+
+def dumpDep(tar:target, depth = 0):
+    print('%sName: %s, File: %s, Commands: %s' % (' '*(depth * 4), tar.getName(), tar.getFile(), tar.getCommands()))
+    for t in tar.getDepends():
+        dumpDep(t, depth + 1)
+
+dumpDep(test)

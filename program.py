@@ -1,10 +1,10 @@
 import subprocess
+import shutil
 
 class program:
     def __init__(self, name):
         self.__name = name
-        res = subprocess.run(['which', name], stdout=subprocess.PIPE)
-        self.__path = res.stdout.decode('utf8').strip()
+        self.__path = shutil.which(name)
 
     def getName(self):
         return self.__name

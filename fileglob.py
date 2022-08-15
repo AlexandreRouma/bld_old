@@ -6,7 +6,7 @@ def glob(path, pattern):
     fns = os.listdir(path)
     for fn in fns:
         if fnmatch.fnmatch(fn, pattern):
-            result.append(os.path.join(path, fn))
+            result.append(os.path.abspath(os.path.join(path, fn)))
     return result
 
 def globRecurse(path, pattern):
@@ -15,5 +15,5 @@ def globRecurse(path, pattern):
     for root, __, fns in walks:
         for fn in fns:
             if fnmatch.fnmatch(fn, pattern):
-                result.append(os.path.join(root, fn))
+                result.append(os.path.abspath(os.path.join(root, fn)))
     return result
