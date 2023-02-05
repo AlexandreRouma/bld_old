@@ -1,4 +1,8 @@
 .venv/
+.venv_wsl/
 __pycache__/
 test/build/
 .old/
+build/
+build_2/
+HadronUnix/

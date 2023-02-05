@@ -2,8 +2,10 @@ import typing
 import os
 from program import *
 
+import bldglobals
+
 class processor:
-    def __init__(self, prog:program, outGen:typing.Callable[[str],str], argGen:typing.Callable[[str, str, list],list], root = None):
+    def __init__(self, prog:program, outGen:typing.Callable[[str],str], argGen:typing.Callable[[str, str, list],list]):
         self.__prog = prog
         self.__outGen = outGen
         self.__argGen = argGen
@@ -18,7 +20,8 @@ class processor:
         
         # Generate the data
         input = os.path.abspath(input)
-        outName = self.__outGen(os.path.basename(input))
+        relPath = os.path.dirname(os.path.relpath(input, bldglobals.TOP_LEVEL_DIR))
+        outName = os.path.join(bldglobals.BUILD_DIR, os.path.join(relPath, self.__outGen(os.path.basename(input))))
         fargs = self.__argGen(input, outName, args)
         cmd = self.__prog.getPath()
         for a in fargs:

@@ -1,9 +1,12 @@
+import os
+
 class target:
-    def __init__(self, name:str, file:str, commands:list, deps:list = []):
+    def __init__(self, name:str, file:str, commands:list, deps:list = [], includes:list = []):
         self.__name = name
-        self.__file = file
+        self.__file = os.path.abspath(file)
         self.__commands = commands
         self.__depends = deps
+        self.__includes = includes
 
     def depends(self, dep:'target'):
         self.__depends.append(dep)
@@ -20,7 +23,5 @@ class target:
     def getDepends(self):
         return self.__depends
 
-    __name = ''
-    __file = ''
-    __commands = []
-    __depends = []
+    def getIncludes(self):
+        return self.__includes

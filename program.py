@@ -11,6 +11,3 @@ class program:
 
     def getPath(self):
         return self.__path
-    
-    __name = ''
-    __path = ''
